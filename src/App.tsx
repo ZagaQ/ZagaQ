@@ -9,6 +9,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React, { useEffect, useState } from 'react';
 import { onAuthStateChanged } from 'firebase/auth';
 import { auth } from './config/firebase';
+import SigninScreen from './components/contents/screen/signin/SigninScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -38,6 +39,7 @@ export default function App() {
               <Stack.Screen name="Home" component={HomeScreen} />
             ) : (
               <>
+                <Stack.Screen name="Signin" component={SigninScreen} />
                 <Stack.Screen name="Register" component={RegisterScreen} />
               </>
             )}

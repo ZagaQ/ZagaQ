@@ -10,16 +10,16 @@ import {
   Link,
   VStack,
 } from "native-base"
-import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../../../../config/firebase";
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '../../../../config/firebase'
 
-const RegisterScreen = (props: any) => {
+const SigninScreen = (props: any) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleRegister = async () => {
+  const handleSignin = async () => {
     try {
-      const user = await createUserWithEmailAndPassword(auth, email, password);
+      const user = await signInWithEmailAndPassword(auth, email, password);
       console.log(user);
     } catch (error: unknown) {
       if (error instanceof Error) {
@@ -36,7 +36,7 @@ const RegisterScreen = (props: any) => {
       <Center flex={1} px={3}>
         <VStack flex={1} justifyContent="flex-end" w="100%">
           <Heading mb={3}>
-            アカウント登録
+            ログイン
           </Heading>
           <FormControl isRequired>
             <FormControl.Label>メールアドレス</FormControl.Label>
@@ -52,12 +52,12 @@ const RegisterScreen = (props: any) => {
               最低6文字である必要があります。
             </FormControl.HelperText>
           </FormControl>
-          <Button onPress={handleRegister} mb={3}>
-            登録
+          <Button onPress={handleSignin} mb={3}>
+            ログイン
           </Button>
           <Center>
-            <Link onPress={() => props.navigation.navigate('Signin')}>
-              ログインはこちら
+            <Link onPress={() => props.navigation.navigate('Register')}>
+              アカウント登録はこちら
             </Link>
           </Center>
         </VStack>
@@ -66,4 +66,4 @@ const RegisterScreen = (props: any) => {
   )
 }
 
-export default RegisterScreen;
+export default SigninScreen;
