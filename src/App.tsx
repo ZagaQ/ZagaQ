@@ -1,18 +1,21 @@
+import React, { useEffect, useState } from 'react';
 import { AppRegistry } from 'react-native';
-
+import { Icon, NativeBaseProvider } from 'native-base';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { NativeBaseProvider } from 'native-base';
-import RegisterScreen from './components/contents/screen/register/RegisterScreen';
-import HomeScreen from './components/contents/screen/home/HomeScreen';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import React, { useEffect, useState } from 'react';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { onAuthStateChanged } from 'firebase/auth';
 import { auth } from './config/firebase';
 import SigninScreen from './components/contents/screen/signin/SigninScreen';
 import LoadingScreen from './components/contents/screen/loading/LoadingScreen';
+import RegisterScreen from './components/contents/screen/register/RegisterScreen';
+import HomeScreen from './components/contents/screen/home/HomeScreen';
+import { Ionicons } from '@expo/vector-icons';
+import { registerRootComponent } from 'expo';
 
 const Stack = createNativeStackNavigator();
+const Tab = createBottomTabNavigator();
 
 export default function App() {
   const [user, setUser] = useState('');
@@ -22,7 +25,6 @@ export default function App() {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       setLoading(false);
       if (user?.email) {
-        console.log(user);
         setUser(user.email);
       } else {
         setUser('');
@@ -44,16 +46,24 @@ export default function App() {
       <SafeAreaProvider>
         <NativeBaseProvider>
           <NavigationContainer>
-            <Stack.Navigator>
-              {user ? (
-                <Stack.Screen name="Home" component={HomeScreen} />
-              ) : (
-                <>
-                  <Stack.Screen name="Signin" component={SigninScreen} />
-                  <Stack.Screen name="Register" component={RegisterScreen} />
-                </>
-              )}
-            </Stack.Navigator>
+            {user ? (
+              <Tab.Navigator>
+                <Tab.Screen 
+                  name="Home"
+                  component={HomeScreen}
+                  options={{
+                    tabBarIcon: ({ color, size }) => (
+                      <Icon as={Ionicons} name='home' color={color} size={size} />
+                    ),
+                  }}
+                />
+              </Tab.Navigator>
+            ) : (
+              <Stack.Navigator>
+                <Stack.Screen name="Signin" component={SigninScreen} />
+                <Stack.Screen name="Register" component={RegisterScreen} />
+              </Stack.Navigator>
+            )}
           </NavigationContainer>
         </NativeBaseProvider>
       </SafeAreaProvider>
@@ -62,3 +72,4 @@ export default function App() {
 }
 
 AppRegistry.registerComponent('ZagaQ', () => App);
+registerRootComponent(App);
