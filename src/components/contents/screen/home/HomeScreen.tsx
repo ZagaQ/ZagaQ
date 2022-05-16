@@ -1,7 +1,8 @@
 import React from 'react';
-import { View, Text, Button } from "native-base";
+import { View, Text, Button, Icon, HStack, CheckIcon } from 'native-base';
 import { signOut } from 'firebase/auth';
 import { auth } from '../../../../config/firebase';
+import { Ionicons } from "@expo/vector-icons";
 
 const HomeScreen = () => {
   const handleLogout = () => {
@@ -20,6 +21,13 @@ const HomeScreen = () => {
       <Button onPress={handleLogout} >
         ログアウト
       </Button>
+      <HStack space={2}>
+      <HStack space={3}>
+        <Icon as={Ionicons} name="home" color="coolGray.800" _dark={{
+          color: "warmGray.50"
+        }} />
+      </HStack>
+      </HStack>
     </View>
   );
 };
