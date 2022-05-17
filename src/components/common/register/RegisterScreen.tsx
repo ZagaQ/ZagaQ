@@ -11,7 +11,7 @@ import {
   VStack,
 } from "native-base"
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../../../../config/firebase";
+import { auth } from "../../../config/firebase";
 
 const RegisterScreen = (props: any) => {
   const [email, setEmail] = useState('');
