@@ -13,8 +13,8 @@ import RegisterScreen from './components/contents/screen/register/RegisterScreen
 import HomeScreen from './components/contents/screen/home/HomeScreen';
 import { Ionicons } from '@expo/vector-icons';
 import { registerRootComponent } from 'expo';
-import LibraryScreen from './components/contents/screen/library/LibraryScreen';
 import StatisticsScreen from './components/contents/screen/statistics/StatisticsScreen';
+import LibraryTab from './components/contents/tab/library/LIbraryTab';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -49,7 +49,7 @@ export default function App() {
         <NativeBaseProvider>
           <NavigationContainer>
             {user ? (
-              <Tab.Navigator>
+              <Tab.Navigator screenOptions={{ headerShown: false }}>
                 <Tab.Screen 
                   name="Home"
                   component={HomeScreen}
@@ -61,7 +61,7 @@ export default function App() {
                 />
                 <Tab.Screen
                   name="Library"
-                  component={LibraryScreen}
+                  component={LibraryTab}
                   options={{
                     tabBarIcon: ({ color, size }) => (
                       <Icon as={Ionicons} name='library' color={color} size={size} />
