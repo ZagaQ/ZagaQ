@@ -1,6 +1,6 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack"
 import LibraryScreen from "./screen/library/LibraryScreen"
-import CreateBookScreen from "./screen/createbook/CreateBookScreen"
+import CreateBookScreen from "./screen/createBook/CreateBookScreen"
 
 export type LibraryStackParamList = {
   Library: undefined;
