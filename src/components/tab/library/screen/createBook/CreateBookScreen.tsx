@@ -5,6 +5,7 @@ import { auth, store } from "../../../../../config/firebase";
 import { addDoc, collection, doc, getDoc, runTransaction, setDoc, Transaction } from "firebase/firestore";
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { LibraryStackParamList } from '../../LibraryTab';
+import createBook from '../../../../../script/createBook';
 
 type Props = NativeStackScreenProps<LibraryStackParamList, "CreateBook">
 
@@ -15,40 +16,28 @@ const CreateBookScreen = ({ navigation }: Props) => {
   const [description, setDescription] = useState('');
   const [createError, setCreateError] = useState('');
 
-  const PressCreateBookButton = async () => {
-    if(ValidationCreateBookForm()) {
-      await CreateBook();
+  const pressCreateBookButton = async () => {
+    if(validationCreateBookForm()) {
+      try {
+        await createBook(title, author, description);
+      } catch (e) {
+        if (e instanceof Error) {
+          setCreateError(e.message);
+        } else {
+          setCreateError("未知のエラーにより、問題集の追加に失敗しました");
+        }
+      }
+      navigation.navigate("Library");
     }
   }
 
-  const ValidationCreateBookForm = () => {
+  const validationCreateBookForm = () => {
     let ret = true;
     if(!title) {
       setTitleError("問題集のタイトルは必ず指定する必要があります");
       ret = false;
     }
     return ret;
-  }
-
-  const CreateBook = async () => {
-    try {
-      if(typeof(auth.currentUser?.uid) == "string") {
-        const uid = auth.currentUser?.uid;
-        addDoc(collection(store, "users", uid, "books"), {
-          title: title,
-          author: author,
-          description: description,
-        });
-        navigation.navigate("Library");
-      } else {
-        throw Error("ログインしていません。アプリケーションを再起動してログインしてください。")
-      }
-    } catch(e) {
-      if (e instanceof Error) {
-        setCreateError(e.message);
-      }
-      setCreateError("未知の理由により問題集の追加に失敗しました。");
-    }
   }
 
   return (
@@ -74,7 +63,7 @@ const CreateBookScreen = ({ navigation }: Props) => {
           <TextArea onChangeText={setDescription} value={description} height={20} autoCompleteType="off" />
         </FormControl>
         <FormControl isInvalid={createError != ""}>
-          <Button margin={3} onPress={PressCreateBookButton}>
+          <Button margin={3} onPress={pressCreateBookButton}>
             追加する
           </Button>
           <FormControl.ErrorMessage>{createError}</FormControl.ErrorMessage>

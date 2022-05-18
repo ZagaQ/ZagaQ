@@ -5,9 +5,7 @@ type AddBookButtonProps = {
   onPress: () => void
 }
 
-
 const AddBookButton = (props: AddBookButtonProps) => {
-
   return (
     <View style={{ position: 'absolute', right: 10, bottom: 10}}>
       <Button style={{ margin: 5 }} onPress={ props.onPress }>

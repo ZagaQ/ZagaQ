@@ -47,7 +47,7 @@ const SigninScreen = (props: any) => {
           </FormControl>
           <FormControl isRequired>
             <FormControl.Label>パスワード</FormControl.Label>
-            <Input type="password" onChangeText={setPassword} vaule={password}/>
+            <Input type="password" onChangeText={setPassword} value={password}/>
             <FormControl.HelperText mb={3}>
               最低6文字である必要があります。
             </FormControl.HelperText>
