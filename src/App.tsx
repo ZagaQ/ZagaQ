@@ -14,7 +14,7 @@ import HomeScreen from './components/tab/home/screen/home/HomeScreen';
 import { Ionicons } from '@expo/vector-icons';
 import { registerRootComponent } from 'expo';
 import StatisticsScreen from './components/common/statistics/StatisticsScreen';
-import LibraryTab from './components/tab/library/LIbraryTab';
+import LibraryTab from './components/tab/library/LibraryTab';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();

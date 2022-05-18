@@ -2,7 +2,7 @@ import React from 'react';
 import { View, } from 'native-base';
 import AddBookButton from './parts/AddBookButton';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { LibraryStackParamList } from '../../LIbraryTab';
+import { LibraryStackParamList } from '../../LibraryTab';
 
 type Props = NativeStackScreenProps<LibraryStackParamList, 'Library'>
 

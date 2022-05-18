@@ -11,7 +11,8 @@ import {
   VStack,
 } from "native-base"
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../../../config/firebase";
+import { auth, store } from "../../../config/firebase";
+import { doc, setDoc } from 'firebase/firestore';
 
 const RegisterScreen = (props: any) => {
   const [email, setEmail] = useState('');
@@ -20,7 +21,9 @@ const RegisterScreen = (props: any) => {
   const handleRegister = async () => {
     try {
       const user = await createUserWithEmailAndPassword(auth, email, password);
-      console.log(user);
+      await setDoc(doc(store, "users", user.user.uid), {
+        bookCount: 0
+      });
     } catch (error: unknown) {
       if (error instanceof Error) {
         console.log(error.message);
