@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, Button, Icon, HStack, CheckIcon } from 'native-base';
 import { signOut } from 'firebase/auth';
-import { auth } from '../../../../config/firebase';
+import { auth } from '../../../../../config/firebase';
 import { Ionicons } from "@expo/vector-icons";
 
 const HomeScreen = () => {

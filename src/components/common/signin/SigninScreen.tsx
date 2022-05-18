@@ -11,7 +11,7 @@ import {
   VStack,
 } from "native-base"
 import { signInWithEmailAndPassword } from 'firebase/auth';
-import { auth } from '../../../../config/firebase'
+import { auth } from '../../../config/firebase'
 
 const SigninScreen = (props: any) => {
   const [email, setEmail] = useState('');
@@ -47,7 +47,7 @@ const SigninScreen = (props: any) => {
           </FormControl>
           <FormControl isRequired>
             <FormControl.Label>パスワード</FormControl.Label>
-            <Input type="password" onChangeText={setPassword} vaule={password}/>
+            <Input type="password" onChangeText={setPassword} value={password}/>
             <FormControl.HelperText mb={3}>
               最低6文字である必要があります。
             </FormControl.HelperText>
