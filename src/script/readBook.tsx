@@ -7,11 +7,11 @@ import Book, { bookConverter } from './class/Book';
  */
 const readBook = async () => {
   if(typeof(auth.currentUser?.uid) == "string") {
-    const ret: Book[] = []
+    const ret: {[id: string]: Book} = {}
     const uid = auth.currentUser?.uid;
     const querySnapShot = await getDocs(collection(store, "users", uid, "books").withConverter(bookConverter));
     querySnapShot.forEach((doc) => {
-      ret.push(doc.data());
+      ret[doc.id] = doc.data();
     });
     return ret;
   } else {
