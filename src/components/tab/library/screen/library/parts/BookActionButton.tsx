@@ -1,7 +1,14 @@
 import { View, Button, Icon, Actionsheet, useDisclose } from 'native-base';
 import { Ionicons } from '@expo/vector-icons';
+import Book from '../../../../../../script/class/Book';
+import DeleteBookModal from './DeleteBookModal';
 
 type BookActionButtonProps = {
+  item: {
+    key: string,
+    value: Book,
+  }
+  reload: () => Promise<void>
 }
 
 const BookActionButton = (props: BookActionButtonProps) => {
@@ -15,8 +22,8 @@ const BookActionButton = (props: BookActionButtonProps) => {
       <Actionsheet isOpen={isOpen} onClose={onClose}>
         <Actionsheet.Content>
           <Actionsheet.Item>セクションの追加</Actionsheet.Item>
-          <Actionsheet.Item>情報の更新</Actionsheet.Item>
-          <Actionsheet.Item borderTopWidth={1}>削除</Actionsheet.Item> 
+          <Actionsheet.Item>情報の編集</Actionsheet.Item>
+          <DeleteBookModal item={props.item} reload={() => props.reload()}/>
         </Actionsheet.Content>
       </Actionsheet>
     </View>

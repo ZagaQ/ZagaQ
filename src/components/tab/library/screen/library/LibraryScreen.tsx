@@ -17,8 +17,6 @@ const HomeScreen = ({ navigation } :Props) => {
     const unsubscribe = navigation.addListener('focus', () => {
       getBookData();
     });
-    console.log(books);
-
     return unsubscribe;
   }, [navigation]);
 
@@ -41,7 +39,7 @@ const HomeScreen = ({ navigation } :Props) => {
             </Center>
             <Spacer />
             <VStack>
-              <BookActionButton />
+              <BookActionButton item={item} reload={() => getBookData()}/>
             </VStack>
           </HStack>
         </Pressable>
