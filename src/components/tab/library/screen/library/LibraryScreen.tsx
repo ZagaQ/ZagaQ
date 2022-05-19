@@ -6,12 +6,12 @@ import { LibraryStackParamList } from '../../LibraryTab';
 import readBook from '../../../../../script/readBook';
 import Book from '../../../../../script/class/Book';
 import { Ionicons } from '@expo/vector-icons';
+import BookActionButton from './parts/BookActionButton';
 
 type Props = NativeStackScreenProps<LibraryStackParamList, 'Library'>
 
 const HomeScreen = ({ navigation } :Props) => {
   const [books, setBooks] = useState<{[id: string]: Book}>({});
-  const { isOpen, onOpen, onClose } = useDisclose();
 
   React.useEffect(() => {
     const unsubscribe = navigation.addListener('focus', () => {
@@ -41,14 +41,7 @@ const HomeScreen = ({ navigation } :Props) => {
             </Center>
             <Spacer />
             <VStack>
-              <Button variant="ghost" colorScheme="gray" onPress={onOpen}>
-                <Icon as={Ionicons} name="ellipsis-vertical" size={5} color="black" />
-              </Button>
-              <Actionsheet isOpen={isOpen} onClose={onClose}>
-                <Actionsheet.Content>
-                  <Actionsheet.Item>セクションの追加</Actionsheet.Item>
-                </Actionsheet.Content>
-              </Actionsheet>
+              <BookActionButton />
             </VStack>
           </HStack>
         </Pressable>
