@@ -1,4 +1,5 @@
-import { Center, Text, View } from "native-base"
+import React from 'react';
+import {Center, Text, View} from 'native-base';
 
 const LoadingScreen = () => {
   return (
@@ -9,7 +10,7 @@ const LoadingScreen = () => {
         </Text>
       </Center>
     </View>
-  )
-}
+  );
+};
 
 export default LoadingScreen;

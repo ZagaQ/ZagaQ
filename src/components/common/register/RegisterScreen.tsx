@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Platform } from 'react-native';
+import React, {useState} from 'react';
+import {Platform} from 'react-native';
 import {
   Button,
   Center,
@@ -9,10 +9,10 @@ import {
   KeyboardAvoidingView,
   Link,
   VStack,
-} from "native-base"
-import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth, store } from "../../../config/firebase";
-import { doc, setDoc } from 'firebase/firestore';
+} from 'native-base';
+import {createUserWithEmailAndPassword} from 'firebase/auth';
+import {auth, store} from '../../../config/firebase';
+import {doc, setDoc} from 'firebase/firestore';
 
 const RegisterScreen = (props: any) => {
   const [email, setEmail] = useState('');
@@ -21,8 +21,8 @@ const RegisterScreen = (props: any) => {
   const handleRegister = async () => {
     try {
       const user = await createUserWithEmailAndPassword(auth, email, password);
-      await setDoc(doc(store, "users", user.user.uid), {
-        bookCount: 0
+      await setDoc(doc(store, 'users', user.user.uid), {
+        bookCount: 0,
       });
     } catch (error: unknown) {
       if (error instanceof Error) {
@@ -33,9 +33,9 @@ const RegisterScreen = (props: any) => {
 
   return (
     <KeyboardAvoidingView h={{
-      base: "400px",
-      lg: "auto"
-    }} behavior={Platform.OS === "ios" ? "padding" : "height"}>
+      base: '400px',
+      lg: 'auto',
+    }} behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
       <Center flex={1} px={3}>
         <VStack flex={1} justifyContent="flex-end" w="100%">
           <Heading mb={3}>
@@ -66,7 +66,7 @@ const RegisterScreen = (props: any) => {
         </VStack>
       </Center>
     </KeyboardAvoidingView>
-  )
-}
+  );
+};
 
 export default RegisterScreen;
