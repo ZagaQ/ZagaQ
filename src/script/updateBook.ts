@@ -2,10 +2,10 @@ import {auth, store} from '../config/firebase';
 import {doc, updateDoc} from 'firebase/firestore';
 import Book from './class/Book';
 
-const createBook = async (id: string, book: Book) => {
+const updateBook = async (id: string, book: Book) => {
   if (typeof(auth.currentUser?.uid) == 'string') {
     const uid = auth.currentUser?.uid;
-    updateDoc(doc(store, 'users', uid, 'books', id), {
+    await updateDoc(doc(store, 'users', uid, 'books', id), {
       title: book.title,
       author: book.author,
       description: book.description,
@@ -15,4 +15,4 @@ const createBook = async (id: string, book: Book) => {
   }
 };
 
-export default createBook;
+export default updateBook;

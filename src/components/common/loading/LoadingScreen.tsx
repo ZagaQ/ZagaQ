@@ -1,7 +1,7 @@
 import React from 'react';
 import {Center, Text, View} from 'native-base';
 
-const LoadingScreen = () => {
+const LoadingScreen: React.VFC = () => {
   return (
     <View>
       <Center flex={1} px="3">

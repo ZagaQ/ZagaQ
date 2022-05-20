@@ -1,3 +1,4 @@
+import React from 'react';
 import {
   Button,
   Center,
@@ -7,21 +8,29 @@ import {
   TextArea,
 } from 'native-base';
 import {Platform} from 'react-native';
-import React, {useCallback, useState} from 'react';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {LibraryStackParamList} from '../../LibraryTab';
 import createBook from '../../../../../script/createBook';
 
 type Props = NativeStackScreenProps<LibraryStackParamList, 'CreateBook'>
 
-const CreateBookScreen = ({navigation}: Props) => {
-  const [title, setTitle] = useState('');
-  const [titleError, setTitleError] = useState('');
-  const [author, setAuthor] = useState('');
-  const [description, setDescription] = useState('');
-  const [createError, setCreateError] = useState('');
+const CreateBookScreen: React.VFC<Props> = ({navigation}) => {
+  const [title, setTitle] = React.useState('');
+  const [titleError, setTitleError] = React.useState('');
+  const [author, setAuthor] = React.useState('');
+  const [description, setDescription] = React.useState('');
+  const [createError, setCreateError] = React.useState('');
 
-  const pressCreateBookButton = useCallback(async () => {
+  const validationCreateBookForm = React.useCallback(() => {
+    let ret = true;
+    if (!title) {
+      setTitleError('問題集のタイトルは必ず指定する必要があります');
+      ret = false;
+    }
+    return ret;
+  }, [title]);
+
+  const pressCreateBookButton = React.useCallback(async () => {
     if (validationCreateBookForm()) {
       try {
         await createBook({title, author, description});
@@ -35,15 +44,6 @@ const CreateBookScreen = ({navigation}: Props) => {
       navigation.navigate('Library');
     }
   }, [title, author, description]);
-
-  const validationCreateBookForm = useCallback(() => {
-    let ret = true;
-    if (!title) {
-      setTitleError('問題集のタイトルは必ず指定する必要があります');
-      ret = false;
-    }
-    return ret;
-  }, [title]);
 
   return (
     <KeyboardAvoidingView h={{

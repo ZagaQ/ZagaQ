@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {Platform} from 'react-native';
 import {
   Button,
@@ -11,22 +11,29 @@ import {
   VStack,
 } from 'native-base';
 import {signInWithEmailAndPassword} from 'firebase/auth';
-import {auth} from '../../../config/firebase';
+import {auth} from '../../../../config/firebase';
+import {NativeStackScreenProps} from '@react-navigation/native-stack';
+import {AccountStackParamList} from '../AccountStack';
 
-const SigninScreen = (props: any) => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+type Props = NativeStackScreenProps<AccountStackParamList, 'Signin'>
 
-  const handleSignin = async () => {
+const SigninScreen: React.VFC<Props> = ({navigation}) => {
+  const [email, setEmail] = React.useState('');
+  const [password, setPassword] = React.useState('');
+
+  const handleSignin = React.useCallback(async () => {
     try {
-      const user = await signInWithEmailAndPassword(auth, email, password);
-      console.log(user);
+      await signInWithEmailAndPassword(auth, email, password);
     } catch (error: unknown) {
       if (error instanceof Error) {
         console.log(error.message);
       }
     }
-  };
+  }, [email, password]);
+
+  const navigateRegisterScreen = React.useCallback(() => {
+    navigation.navigate('Register');
+  }, []);
 
   return (
     <KeyboardAvoidingView h={{
@@ -56,7 +63,7 @@ const SigninScreen = (props: any) => {
             ログイン
           </Button>
           <Center>
-            <Link onPress={() => props.navigation.navigate('Register')}>
+            <Link onPress={navigateRegisterScreen}>
               アカウント登録はこちら
             </Link>
           </Center>

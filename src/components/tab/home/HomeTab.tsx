@@ -1,6 +1,7 @@
 import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import HomeScreen from '../library/screen/library/LibraryScreen';
+import HomeScreen from './screen/home/HomeScreen';
+
 
 export type HomeStackParamList = {
   Home: undefined;
@@ -8,7 +9,7 @@ export type HomeStackParamList = {
 
 const Stack = createNativeStackNavigator<HomeStackParamList>();
 
-const HomeTab = () => {
+const HomeTab: React.VFC = () => {
   return (
     <Stack.Navigator>
       <Stack.Screen name='Home' component={HomeScreen} />

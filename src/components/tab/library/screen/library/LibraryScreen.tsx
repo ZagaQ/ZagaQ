@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {
   View,
   FlatList,
@@ -18,8 +18,12 @@ import BookActionButton from './parts/BookActionButton';
 
 type Props = NativeStackScreenProps<LibraryStackParamList, 'Library'>
 
-const HomeScreen = ({navigation} :Props) => {
-  const [books, setBooks] = useState<{[id: string]: Book}>({});
+const LibraryScreen: React.VFC<Props> = ({navigation}) => {
+  const [books, setBooks] = React.useState<{[id: string]: Book}>({});
+
+  const getBookData = React.useCallback(async () => {
+    setBooks(await readBook());
+  }, []);
 
   React.useEffect(() => {
     const unsubscribe = navigation.addListener('focus', () => {
@@ -31,10 +35,6 @@ const HomeScreen = ({navigation} :Props) => {
 
   const pressAddBookButton = React.useCallback(() => {
     navigation.navigate('CreateBook');
-  }, []);
-
-  const getBookData = React.useCallback(async () => {
-    setBooks(await readBook());
   }, []);
 
   return (
@@ -58,11 +58,11 @@ const HomeScreen = ({navigation} :Props) => {
               </VStack>
             </HStack>
           </Pressable>
-        }>
-      </FlatList>
+        }
+      />
       <AddBookButton onPress={pressAddBookButton} />
     </View>
   );
 };
 
-export default HomeScreen;
+export default LibraryScreen;

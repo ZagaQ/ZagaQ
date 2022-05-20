@@ -5,7 +5,7 @@ import Book from './class/Book';
 const createBook = async (book: Book) => {
   if (typeof(auth.currentUser?.uid) == 'string') {
     const uid = auth.currentUser?.uid;
-    addDoc(collection(store, 'users', uid, 'books'), {
+    await addDoc(collection(store, 'users', uid, 'books'), {
       title: book.title,
       author: book.author,
       description: book.description,

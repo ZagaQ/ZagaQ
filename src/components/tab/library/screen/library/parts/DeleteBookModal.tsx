@@ -1,5 +1,5 @@
 import {Modal, Button, Text, Actionsheet} from 'native-base';
-import React, {useState} from 'react';
+import React from 'react';
 import Book from '../../../../../../script/class/Book';
 import deleteBook from '../../../../../../script/deleteBook';
 
@@ -11,14 +11,14 @@ type DeleteBookModalProps = {
   reload: () => Promise<void>
 }
 
-const DeleteBookModal = (props: DeleteBookModalProps) => {
-  const [showModal, setShowModal] = useState(false);
+const DeleteBookModal: React.VFC<DeleteBookModalProps> = ({item, reload}) => {
+  const [showModal, setShowModal] = React.useState(false);
 
   const onPressDeleteButton = React.useCallback(async () => {
-    await deleteBook(props.item.key);
-    await props.reload();
+    await deleteBook(item.key);
+    await reload();
     setShowModal(false);
-  }, []);
+  }, [item, reload]);
 
   const onPressCancelButton = React.useCallback(() => {
     setShowModal(false);
@@ -32,7 +32,7 @@ const DeleteBookModal = (props: DeleteBookModalProps) => {
           <Modal.CloseButton />
           <Modal.Header>問題集の削除</Modal.Header>
           <Modal.Body>
-            <Text>問題集「{props.item.value.title}」を削除しますか？</Text>
+            <Text>問題集「{item.value.title}」を削除しますか？</Text>
             <Text>この操作は取り消せません。</Text>
             <Text>また、この問題集内に作成されたセクションも削除されます。</Text>
           </Modal.Body>

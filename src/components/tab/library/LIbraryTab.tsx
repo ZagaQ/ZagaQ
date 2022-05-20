@@ -13,7 +13,7 @@ export type LibraryStackParamList = {
 
 const Stack = createNativeStackNavigator<LibraryStackParamList>();
 
-const LibraryTab = () => {
+const LibraryTab: React.VFC = () => {
   return (
     <Stack.Navigator>
       <Stack.Screen name='Library' component={LibraryScreen} />
