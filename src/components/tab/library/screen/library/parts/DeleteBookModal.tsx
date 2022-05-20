@@ -20,14 +20,18 @@ const DeleteBookModal: React.VFC<DeleteBookModalProps> = ({item, reload}) => {
     setShowModal(false);
   }, [item, reload]);
 
-  const onPressCancelButton = React.useCallback(() => {
+  const setShowModalTrue = React.useCallback(() => {
+    setShowModal(true);
+  }, []);
+
+  const setShowModalFalse = React.useCallback(() => {
     setShowModal(false);
   }, []);
 
   return (
-    <Actionsheet.Item borderTopWidth={1} onPress={() => setShowModal(true)}>
+    <Actionsheet.Item borderTopWidth={1} onPress={setShowModalTrue}>
       削除
-      <Modal isOpen={showModal} onClose={() => setShowModal(false)}>
+      <Modal isOpen={showModal} onClose={setShowModalFalse}>
         <Modal.Content>
           <Modal.CloseButton />
           <Modal.Header>問題集の削除</Modal.Header>
@@ -41,7 +45,7 @@ const DeleteBookModal: React.VFC<DeleteBookModalProps> = ({item, reload}) => {
               <Button
                 variant="ghost"
                 colorScheme="blueGray"
-                onPress={onPressCancelButton}
+                onPress={setShowModalFalse}
               >
                 キャンセル
               </Button>
