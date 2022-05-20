@@ -10,33 +10,33 @@ import {Platform} from 'react-native';
 import React, {useCallback, useState} from 'react';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {LibraryStackParamList} from '../../LibraryTab';
-import createBook from '../../../../../script/createBook';
+import updateBook from '../../../../../script/updateBook';
 
-type Props = NativeStackScreenProps<LibraryStackParamList, 'CreateBook'>
+type Props = NativeStackScreenProps<LibraryStackParamList, 'UpdateBook'>
 
-const CreateBookScreen = ({navigation}: Props) => {
-  const [title, setTitle] = useState('');
+const UpdateBookScreen = ({navigation, route}: Props) => {
+  const [title, setTitle] = useState(route.params.book.title);
   const [titleError, setTitleError] = useState('');
-  const [author, setAuthor] = useState('');
-  const [description, setDescription] = useState('');
-  const [createError, setCreateError] = useState('');
+  const [author, setAuthor] = useState(route.params.book.author);
+  const [description, setDescription] = useState(route.params.book.description);
+  const [updateError, setCreateError] = useState('');
 
-  const pressCreateBookButton = useCallback(async () => {
-    if (validationCreateBookForm()) {
+  const pressUpdateBookButton = useCallback(async () => {
+    if (validationUpdateBookForm()) {
       try {
-        await createBook({title, author, description});
+        await updateBook(route.params.id, {title, author, description});
       } catch (e) {
         if (e instanceof Error) {
           setCreateError(e.message);
         } else {
-          setCreateError('未知のエラーにより、問題集の追加に失敗しました');
+          setCreateError('未知のエラーにより、問題集情報の更新に失敗しました');
         }
       }
       navigation.navigate('Library');
     }
   }, [title, author, description]);
 
-  const validationCreateBookForm = useCallback(() => {
+  const validationUpdateBookForm = useCallback(() => {
     let ret = true;
     if (!title) {
       setTitleError('問題集のタイトルは必ず指定する必要があります');
@@ -69,15 +69,15 @@ const CreateBookScreen = ({navigation}: Props) => {
             autoCompleteType="off"
           />
         </FormControl>
-        <FormControl isInvalid={createError != ''}>
-          <Button margin={3} onPress={pressCreateBookButton}>
-            追加する
+        <FormControl isInvalid={updateError != ''}>
+          <Button margin={3} onPress={pressUpdateBookButton}>
+            更新する
           </Button>
-          <FormControl.ErrorMessage>{createError}</FormControl.ErrorMessage>
+          <FormControl.ErrorMessage>{updateError}</FormControl.ErrorMessage>
         </FormControl>
       </Center>
     </KeyboardAvoidingView>
   );
 };
 
-export default CreateBookScreen;
+export default UpdateBookScreen;

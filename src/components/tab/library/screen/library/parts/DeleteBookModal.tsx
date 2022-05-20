@@ -1,5 +1,5 @@
-import { Modal, Button, Text, Actionsheet } from 'native-base';
-import React, { useState } from 'react';
+import {Modal, Button, Text, Actionsheet} from 'native-base';
+import React, {useState} from 'react';
 import Book from '../../../../../../script/class/Book';
 import deleteBook from '../../../../../../script/deleteBook';
 
@@ -14,11 +14,15 @@ type DeleteBookModalProps = {
 const DeleteBookModal = (props: DeleteBookModalProps) => {
   const [showModal, setShowModal] = useState(false);
 
-  const onPressDeleteButton = async(id: string) => {
-    await deleteBook(id);
+  const onPressDeleteButton = React.useCallback(async () => {
+    await deleteBook(props.item.key);
     await props.reload();
     setShowModal(false);
-  }
+  }, []);
+
+  const onPressCancelButton = React.useCallback(() => {
+    setShowModal(false);
+  }, []);
 
   return (
     <Actionsheet.Item borderTopWidth={1} onPress={() => setShowModal(true)}>
@@ -34,10 +38,17 @@ const DeleteBookModal = (props: DeleteBookModalProps) => {
           </Modal.Body>
           <Modal.Footer>
             <Button.Group space={2}>
-              <Button variant="ghost" colorScheme="blueGray" onPress={() => { setShowModal(false); }}>
+              <Button
+                variant="ghost"
+                colorScheme="blueGray"
+                onPress={onPressCancelButton}
+              >
                 キャンセル
               </Button>
-              <Button backgroundColor="red.500" onPress={() => onPressDeleteButton(props.item.key)}>
+              <Button
+                backgroundColor="red.500"
+                onPress={onPressDeleteButton}
+              >
                 削除
               </Button>
             </Button.Group>
@@ -45,7 +56,7 @@ const DeleteBookModal = (props: DeleteBookModalProps) => {
         </Modal.Content>
       </Modal>
     </Actionsheet.Item>
-  )
-}
+  );
+};
 
 export default DeleteBookModal;

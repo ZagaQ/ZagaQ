@@ -4,10 +4,11 @@
         "firebaseapp",
         "firestore",
         "Ionicons",
+        "linebreak",
         "myapp",
         "signin",
         "Zaga",
         "zagaq"
     ],
-    "files.eol": "\n"
+    "files.eol": "\r\n"
 }
