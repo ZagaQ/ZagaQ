@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View } from 'native-base';
+import {Text, View} from 'native-base';
 
 const StatisticsScreen = () => {
   return (

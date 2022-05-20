@@ -1,10 +1,13 @@
 {
     "cSpell.words": [
+        "appspot",
+        "firebaseapp",
         "firestore",
         "Ionicons",
         "myapp",
         "signin",
         "Zaga",
         "zagaq"
-    ]
+    ],
+    "files.eol": "\n"
 }
