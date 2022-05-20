@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Platform } from 'react-native';
+import React, {useState} from 'react';
+import {Platform} from 'react-native';
 import {
   Button,
   Center,
@@ -9,9 +9,9 @@ import {
   KeyboardAvoidingView,
   Link,
   VStack,
-} from "native-base"
-import { signInWithEmailAndPassword } from 'firebase/auth';
-import { auth } from '../../../config/firebase'
+} from 'native-base';
+import {signInWithEmailAndPassword} from 'firebase/auth';
+import {auth} from '../../../config/firebase';
 
 const SigninScreen = (props: any) => {
   const [email, setEmail] = useState('');
@@ -30,9 +30,9 @@ const SigninScreen = (props: any) => {
 
   return (
     <KeyboardAvoidingView h={{
-      base: "400px",
-      lg: "auto"
-    }} behavior={Platform.OS === "ios" ? "padding" : "height"}>
+      base: '400px',
+      lg: 'auto',
+    }} behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
       <Center flex={1} px={3}>
         <VStack flex={1} justifyContent="flex-end" w="100%">
           <Heading mb={3}>
@@ -63,7 +63,7 @@ const SigninScreen = (props: any) => {
         </VStack>
       </Center>
     </KeyboardAvoidingView>
-  )
-}
+  );
+};
 
 export default SigninScreen;
