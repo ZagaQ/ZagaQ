@@ -17,6 +17,9 @@ import {NativeStackScreenProps} from '@react-navigation/native-stack';
 
 type Props = NativeStackScreenProps<AccountStackParamList, 'Register'>
 
+/**
+ * アカウントの新規登録を行う画面
+ */
 const RegisterScreen: React.VFC<Props> = ({navigation}) => {
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');

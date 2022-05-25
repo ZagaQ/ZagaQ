@@ -14,6 +14,9 @@ import updateBook from '../../../../../script/updateBook';
 
 type Props = NativeStackScreenProps<LibraryStackParamList, 'UpdateBook'>
 
+/**
+ * 問題集情報の更新画面
+ */
 const UpdateBookScreen: React.VFC<Props> = ({navigation, route}) => {
   const [title, setTitle] = React.useState(route.params.book.title);
   const [titleError, setTitleError] = React.useState('');

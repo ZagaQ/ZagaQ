@@ -9,6 +9,9 @@ export type HomeStackParamList = {
 
 const Stack = createNativeStackNavigator<HomeStackParamList>();
 
+/**
+ * ホーム関係の画面をまとめるタブ
+ */
 const HomeTab: React.VFC = () => {
   return (
     <Stack.Navigator>

@@ -3,6 +3,9 @@ import {View, Text, Button} from 'native-base';
 import {signOut} from 'firebase/auth';
 import {auth} from '../../../../../config/firebase';
 
+/**
+ * ホーム画面
+ */
 const HomeScreen: React.VFC = () => {
   const handleLogout = React.useCallback(() => {
     signOut(auth);

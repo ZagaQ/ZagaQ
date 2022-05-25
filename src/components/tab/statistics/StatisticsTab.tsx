@@ -9,6 +9,9 @@ export type StatisticsStackParamList = {
 
 const Stack = createNativeStackNavigator<StatisticsStackParamList>();
 
+/**
+ * 統計関係の画面をまとめるタブ
+ */
 const StatisticsTab: React.VFC = () => {
   return (
     <Stack.Navigator>

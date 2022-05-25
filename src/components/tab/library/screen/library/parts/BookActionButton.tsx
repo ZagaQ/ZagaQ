@@ -19,6 +19,9 @@ type BookActionButtonProps = {
 
 type NavigationProps = NativeStackNavigationProp<LibraryStackParamList>;
 
+/**
+ * 問題集一覧における問題集に対する操作を行うボタンとアクションシート
+ */
 const BookActionButton: React.VFC<BookActionButtonProps> = ({item, reload}) => {
   const {isOpen, onOpen, onClose} = useDisclose();
   const navigation = useNavigation<NavigationProps>();

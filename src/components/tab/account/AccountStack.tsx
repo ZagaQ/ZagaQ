@@ -10,6 +10,9 @@ export type AccountStackParamList = {
   'Register': undefined;
 }
 
+/**
+ * アカウント関係の画面をまとめたStack
+ */
 const AccountStack: React.VFC = () => {
   return (
     <Stack.Navigator>

@@ -6,6 +6,9 @@ type AddBookButtonProps = {
   onPress: () => void
 }
 
+/**
+ * 所持問題集の追加画面を開くボタン
+ */
 const AddBookButton: React.VFC<AddBookButtonProps> = ({onPress}) => {
   return (
     <View style={{position: 'absolute', right: 10, bottom: 10}}>

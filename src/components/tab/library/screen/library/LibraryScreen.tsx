@@ -18,6 +18,9 @@ import BookActionButton from './parts/BookActionButton';
 
 type Props = NativeStackScreenProps<LibraryStackParamList, 'Library'>
 
+/**
+ * 所持問題集一覧の画面
+ */
 const LibraryScreen: React.VFC<Props> = ({navigation}) => {
   const [books, setBooks] = React.useState<{[id: string]: Book}>({});
 

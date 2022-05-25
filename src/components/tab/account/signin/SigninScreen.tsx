@@ -17,6 +17,9 @@ import {AccountStackParamList} from '../AccountStack';
 
 type Props = NativeStackScreenProps<AccountStackParamList, 'Signin'>
 
+/**
+ * ログインを行う画面
+ */
 const SigninScreen: React.VFC<Props> = ({navigation}) => {
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');

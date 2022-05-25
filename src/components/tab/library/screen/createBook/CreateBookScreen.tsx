@@ -14,6 +14,9 @@ import createBook from '../../../../../script/createBook';
 
 type Props = NativeStackScreenProps<LibraryStackParamList, 'CreateBook'>
 
+/**
+ * 所持問題集の追加を行う画面
+ */
 const CreateBookScreen: React.VFC<Props> = ({navigation}) => {
   const [title, setTitle] = React.useState('');
   const [titleError, setTitleError] = React.useState('');

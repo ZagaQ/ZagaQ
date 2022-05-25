@@ -11,6 +11,9 @@ type DeleteBookModalProps = {
   reload: () => Promise<void>
 }
 
+/**
+ * 問題集の削除の確認を行うモーダル
+ */
 const DeleteBookModal: React.VFC<DeleteBookModalProps> = ({item, reload}) => {
   const [showModal, setShowModal] = React.useState(false);
 

@@ -2,6 +2,10 @@ import {auth, store} from '../config/firebase';
 import {addDoc, collection} from 'firebase/firestore';
 import Book from './class/Book';
 
+/**
+ * 現在のユーザーの所持問題集を追加する
+ * @param book 追加する問題集のデータ
+ */
 const createBook = async (book: Book) => {
   if (typeof(auth.currentUser?.uid) == 'string') {
     const uid = auth.currentUser?.uid;
