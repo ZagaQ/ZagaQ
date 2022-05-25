@@ -13,6 +13,7 @@ import LibraryTab from './components/tab/library/LibraryTab';
 import AccountStack from './components/tab/account/AccountStack';
 import HomeTab from './components/tab/home/HomeTab';
 import StatisticsTab from './components/tab/statistics/StatisticsTab';
+import {AdMobBanner} from 'expo-ads-admob';
 
 const Tab = createBottomTabNavigator();
 
@@ -96,6 +97,11 @@ export default function App(): JSX.Element {
             ) : (
               <AccountStack />
             )}
+            <AdMobBanner
+              bannerSize="fullBanner"
+              adUnitID="ca-app-pub-8810091747981226/9905144091"
+              servePersonalizedAds
+            />
           </NavigationContainer>
         </NativeBaseProvider>
       </SafeAreaProvider>
