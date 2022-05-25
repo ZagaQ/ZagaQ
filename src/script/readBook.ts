@@ -3,7 +3,7 @@ import {collection, getDocs} from 'firebase/firestore';
 import Book, {bookConverter} from './class/Book';
 
 /**
- *現在のユーザーのすべてのbookの情報を配列として取得する
+ *現在のユーザーのすべての所持問題集の情報をObjectとして取得する
  */
 const readBook = async () => {
   if (typeof(auth.currentUser?.uid) == 'string') {

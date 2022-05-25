@@ -1,4 +1,4 @@
-import React, {useCallback} from 'react';
+import React from 'react';
 import {View, Button, Icon, Actionsheet, useDisclose} from 'native-base';
 import {Ionicons} from '@expo/vector-icons';
 import Book from '../../../../../../script/class/Book';
@@ -19,16 +19,19 @@ type BookActionButtonProps = {
 
 type NavigationProps = NativeStackNavigationProp<LibraryStackParamList>;
 
-const BookActionButton = (props: BookActionButtonProps) => {
+/**
+ * 問題集一覧における問題集に対する操作を行うボタンとアクションシート
+ */
+const BookActionButton: React.VFC<BookActionButtonProps> = ({item, reload}) => {
   const {isOpen, onOpen, onClose} = useDisclose();
   const navigation = useNavigation<NavigationProps>();
 
-  const onPressUpdateBookButton = useCallback(() => {
+  const onPressUpdateBookButton = React.useCallback(() => {
     navigation.navigate(
         'UpdateBook',
-        {id: props.item.key, book: props.item.value},
+        {id: item.key, book: item.value},
     );
-  }, [props]);
+  }, [item]);
 
   return (
     <View>
@@ -43,7 +46,7 @@ const BookActionButton = (props: BookActionButtonProps) => {
           >
             情報の編集
           </Actionsheet.Item>
-          <DeleteBookModal item={props.item} reload={props.reload}/>
+          <DeleteBookModal item={item} reload={reload}/>
         </Actionsheet.Content>
       </Actionsheet>
     </View>

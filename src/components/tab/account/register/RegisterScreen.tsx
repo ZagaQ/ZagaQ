@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {Platform} from 'react-native';
 import {
   Button,
@@ -11,25 +11,32 @@ import {
   VStack,
 } from 'native-base';
 import {createUserWithEmailAndPassword} from 'firebase/auth';
-import {auth, store} from '../../../config/firebase';
-import {doc, setDoc} from 'firebase/firestore';
+import {auth} from '../../../../config/firebase';
+import {AccountStackParamList} from '../AccountStack';
+import {NativeStackScreenProps} from '@react-navigation/native-stack';
 
-const RegisterScreen = (props: any) => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+type Props = NativeStackScreenProps<AccountStackParamList, 'Register'>
 
-  const handleRegister = async () => {
+/**
+ * アカウントの新規登録を行う画面
+ */
+const RegisterScreen: React.VFC<Props> = ({navigation}) => {
+  const [email, setEmail] = React.useState('');
+  const [password, setPassword] = React.useState('');
+
+  const handleRegister = React.useCallback(async () => {
     try {
-      const user = await createUserWithEmailAndPassword(auth, email, password);
-      await setDoc(doc(store, 'users', user.user.uid), {
-        bookCount: 0,
-      });
+      await createUserWithEmailAndPassword(auth, email, password);
     } catch (error: unknown) {
       if (error instanceof Error) {
         console.log(error.message);
       }
     }
-  };
+  }, [email, password]);
+
+  const navigateSigninScreen = React.useCallback(() => {
+    navigation.navigate('Signin');
+  }, []);
 
   return (
     <KeyboardAvoidingView h={{
@@ -59,7 +66,7 @@ const RegisterScreen = (props: any) => {
             登録
           </Button>
           <Center>
-            <Link onPress={() => props.navigation.navigate('Signin')}>
+            <Link onPress={navigateSigninScreen}>
               ログインはこちら
             </Link>
           </Center>

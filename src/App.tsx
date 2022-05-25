@@ -3,20 +3,17 @@ import {AppRegistry} from 'react-native';
 import {Icon, NativeBaseProvider} from 'native-base';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {NavigationContainer} from '@react-navigation/native';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {onAuthStateChanged} from 'firebase/auth';
 import {auth} from './config/firebase';
-import SigninScreen from './components/common/signin/SigninScreen';
 import LoadingScreen from './components/common/loading/LoadingScreen';
-import RegisterScreen from './components/common/register/RegisterScreen';
-import HomeScreen from './components/tab/home/screen/home/HomeScreen';
 import {Ionicons} from '@expo/vector-icons';
 import {registerRootComponent} from 'expo';
-import StatisticsScreen from './components/common/statistics/StatisticsScreen';
 import LibraryTab from './components/tab/library/LibraryTab';
+import AccountStack from './components/tab/account/AccountStack';
+import HomeTab from './components/tab/home/HomeTab';
+import StatisticsTab from './components/tab/statistics/StatisticsTab';
 
-const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
 /**
@@ -55,7 +52,7 @@ export default function App(): JSX.Element {
               <Tab.Navigator screenOptions={{headerShown: false}}>
                 <Tab.Screen
                   name="Home"
-                  component={HomeScreen}
+                  component={HomeTab}
                   options={{
                     tabBarIcon: ({color, size}) => (
                       <Icon
@@ -83,7 +80,7 @@ export default function App(): JSX.Element {
                 />
                 <Tab.Screen
                   name="Statistics"
-                  component={StatisticsScreen}
+                  component={StatisticsTab}
                   options={{
                     tabBarIcon: ({color, size}) => (
                       <Icon
@@ -97,10 +94,7 @@ export default function App(): JSX.Element {
                 />
               </Tab.Navigator>
             ) : (
-              <Stack.Navigator>
-                <Stack.Screen name="Signin" component={SigninScreen} />
-                <Stack.Screen name="Register" component={RegisterScreen} />
-              </Stack.Navigator>
+              <AccountStack />
             )}
           </NavigationContainer>
         </NativeBaseProvider>

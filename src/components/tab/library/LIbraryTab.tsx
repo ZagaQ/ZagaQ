@@ -13,7 +13,10 @@ export type LibraryStackParamList = {
 
 const Stack = createNativeStackNavigator<LibraryStackParamList>();
 
-const LibraryTab = () => {
+/**
+ * 所持問題集関係の画面をまとめるタブ
+ */
+const LibraryTab: React.VFC = () => {
   return (
     <Stack.Navigator>
       <Stack.Screen name='Library' component={LibraryScreen} />

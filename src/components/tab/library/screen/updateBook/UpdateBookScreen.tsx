@@ -1,3 +1,4 @@
+import React from 'react';
 import {
   Button,
   Center,
@@ -7,21 +8,33 @@ import {
   TextArea,
 } from 'native-base';
 import {Platform} from 'react-native';
-import React, {useCallback, useState} from 'react';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {LibraryStackParamList} from '../../LibraryTab';
 import updateBook from '../../../../../script/updateBook';
 
 type Props = NativeStackScreenProps<LibraryStackParamList, 'UpdateBook'>
 
-const UpdateBookScreen = ({navigation, route}: Props) => {
-  const [title, setTitle] = useState(route.params.book.title);
-  const [titleError, setTitleError] = useState('');
-  const [author, setAuthor] = useState(route.params.book.author);
-  const [description, setDescription] = useState(route.params.book.description);
-  const [updateError, setCreateError] = useState('');
+/**
+ * 問題集情報の更新画面
+ */
+const UpdateBookScreen: React.VFC<Props> = ({navigation, route}) => {
+  const [title, setTitle] = React.useState(route.params.book.title);
+  const [titleError, setTitleError] = React.useState('');
+  const [author, setAuthor] = React.useState(route.params.book.author);
+  const [description, setDescription] =
+    React.useState(route.params.book.description);
+  const [updateError, setCreateError] = React.useState('');
 
-  const pressUpdateBookButton = useCallback(async () => {
+  const validationUpdateBookForm = React.useCallback(() => {
+    let ret = true;
+    if (!title) {
+      setTitleError('問題集のタイトルは必ず指定する必要があります');
+      ret = false;
+    }
+    return ret;
+  }, [title]);
+
+  const pressUpdateBookButton = React.useCallback(async () => {
     if (validationUpdateBookForm()) {
       try {
         await updateBook(route.params.id, {title, author, description});
@@ -35,15 +48,6 @@ const UpdateBookScreen = ({navigation, route}: Props) => {
       navigation.navigate('Library');
     }
   }, [title, author, description]);
-
-  const validationUpdateBookForm = useCallback(() => {
-    let ret = true;
-    if (!title) {
-      setTitleError('問題集のタイトルは必ず指定する必要があります');
-      ret = false;
-    }
-    return ret;
-  }, [title]);
 
   return (
     <KeyboardAvoidingView h={{

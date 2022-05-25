@@ -1,11 +1,15 @@
 import {auth, store} from '../config/firebase';
-import {doc, updateDoc} from 'firebase/firestore';
+import {addDoc, collection} from 'firebase/firestore';
 import Book from './class/Book';
 
-const createBook = async (id: string, book: Book) => {
+/**
+ * 現在のユーザーの所持問題集を追加する
+ * @param book 追加する問題集のデータ
+ */
+const createBook = async (book: Book) => {
   if (typeof(auth.currentUser?.uid) == 'string') {
     const uid = auth.currentUser?.uid;
-    updateDoc(doc(store, 'users', uid, 'books', id), {
+    await addDoc(collection(store, 'users', uid, 'books'), {
       title: book.title,
       author: book.author,
       description: book.description,
