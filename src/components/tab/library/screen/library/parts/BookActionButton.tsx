@@ -38,6 +38,7 @@ const BookActionButton: React.VFC<BookActionButtonProps> = ({item, reload}) => {
         'CreateSection',
         {id: item.key},
     );
+    onClose();
   }, [item]);
 
   return (
