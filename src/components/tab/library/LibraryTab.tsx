@@ -10,7 +10,7 @@ export type LibraryStackParamList = {
   Library: undefined;
   CreateBook: undefined;
   UpdateBook: {id: string, book: Book};
-  CreateSection: {id: string}
+  CreateSection: {id: string};
 }
 
 const Stack = createNativeStackNavigator<LibraryStackParamList>();
