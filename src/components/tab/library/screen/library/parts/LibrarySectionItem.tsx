@@ -29,8 +29,8 @@ const LibrarySectionItem: React.VFC<LibrarySectionItemProps> = (
           <SectionActionButton
             item={{
               bookId: bookId,
-              id: id,
-              value: data,
+              sectionId: id,
+              section: data,
             }}
             reload={reload}
           />

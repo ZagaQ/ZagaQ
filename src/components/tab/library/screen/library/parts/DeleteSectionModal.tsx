@@ -6,8 +6,8 @@ import deleteSection from '../../../../../../script/deleteSection';
 type DeleteBookModalProps = {
   item: {
     bookId: string
-    id: string,
-    value: Section,
+    sectionId: string,
+    section: Section,
   }
   reload: () => Promise<void>
 }
@@ -19,7 +19,7 @@ const DeleteSectionModal: React.VFC<DeleteBookModalProps> = ({item, reload}) => 
   const [showModal, setShowModal] = React.useState(false);
 
   const onPressDeleteButton = React.useCallback(async () => {
-    await deleteSection(item.bookId, item.id);
+    await deleteSection(item.bookId, item.sectionId);
     await reload();
     setShowModal(false);
   }, [item, reload]);
@@ -40,7 +40,7 @@ const DeleteSectionModal: React.VFC<DeleteBookModalProps> = ({item, reload}) => 
           <Modal.CloseButton />
           <Modal.Header>問題集の削除</Modal.Header>
           <Modal.Body>
-            <Text>問題集「{item.value.title}」を削除しますか？</Text>
+            <Text>問題集「{item.section.title}」を削除しますか？</Text>
             <Text>この操作は取り消せません。</Text>
             <Text>また、この問題集内に作成されたセクションも削除されます。</Text>
           </Modal.Body>

@@ -1,7 +1,6 @@
 import React from 'react';
 import {
   Button,
-  Center,
   FormControl,
   Input,
   KeyboardAvoidingView,
@@ -51,35 +50,33 @@ const UpdateBookScreen: React.VFC<Props> = ({navigation, route}) => {
 
   return (
     <KeyboardAvoidingView h={{
-      base: '400px',
+      base: '100%',
       lg: 'auto',
-    }} behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
-      <Center flex={1} px={3}>
-        <FormControl isRequired mb={3} isInvalid={titleError != ''}>
-          <FormControl.Label>問題集タイトル</FormControl.Label>
-          <Input onChangeText={setTitle} value={title} />
-          <FormControl.ErrorMessage>{titleError}</FormControl.ErrorMessage>
-        </FormControl>
-        <FormControl mb={3}>
-          <FormControl.Label>発行者</FormControl.Label>
-          <Input onChangeText={setAuthor} value={author} />
-        </FormControl>
-        <FormControl mb={3}>
-          <FormControl.Label>備考</FormControl.Label>
-          <TextArea
-            onChangeText={setDescription}
-            value={description}
-            height={20}
-            autoCompleteType="off"
-          />
-        </FormControl>
-        <FormControl isInvalid={updateError != ''}>
-          <Button margin={3} onPress={pressUpdateBookButton}>
-            更新する
-          </Button>
-          <FormControl.ErrorMessage>{updateError}</FormControl.ErrorMessage>
-        </FormControl>
-      </Center>
+    }} behavior={Platform.OS === 'ios' ? 'padding' : 'height'} flex={1} p={3}>
+      <FormControl isRequired mb={3} isInvalid={titleError != ''}>
+        <FormControl.Label>問題集タイトル</FormControl.Label>
+        <Input onChangeText={setTitle} value={title} />
+        <FormControl.ErrorMessage>{titleError}</FormControl.ErrorMessage>
+      </FormControl>
+      <FormControl mb={3}>
+        <FormControl.Label>発行者</FormControl.Label>
+        <Input onChangeText={setAuthor} value={author} />
+      </FormControl>
+      <FormControl mb={3}>
+        <FormControl.Label>備考</FormControl.Label>
+        <TextArea
+          onChangeText={setDescription}
+          value={description}
+          height={20}
+          autoCompleteType="off"
+        />
+      </FormControl>
+      <FormControl isInvalid={updateError != ''}>
+        <Button my={3} onPress={pressUpdateBookButton}>
+          更新する
+        </Button>
+        <FormControl.ErrorMessage>{updateError}</FormControl.ErrorMessage>
+      </FormControl>
     </KeyboardAvoidingView>
   );
 };

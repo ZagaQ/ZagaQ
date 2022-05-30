@@ -12,8 +12,8 @@ import DeleteSectionModal from './DeleteSectionModal';
 type SectionActionButtonProps = {
   item: {
     bookId: string,
-    id: string,
-    value: Section,
+    sectionId: string,
+    section: Section,
   }
   reload: () => Promise<void>
 }
@@ -30,6 +30,7 @@ const SectionActionButton: React.VFC<SectionActionButtonProps> = (
   const navigation = useNavigation<NavigationProps>();
 
   const onPressUpdateBookButton = React.useCallback(() => {
+    navigation.navigate('UpdateSection', item);
   }, [item]);
 
   return (

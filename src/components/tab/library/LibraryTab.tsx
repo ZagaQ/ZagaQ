@@ -4,13 +4,16 @@ import LibraryScreen from './screen/library/LibraryScreen';
 import CreateBookScreen from './screen/createBook/CreateBookScreen';
 import UpdateBookScreen from './screen/updateBook/UpdateBookScreen';
 import CreateSectionScreen from './screen/createSection/CreateSectionScreen';
+import UpdateSectionScreen from './screen/updateSection/UpdateSectionScreen';
 import Book from '../../../script/class/Book';
+import Section from '../../../script/class/Section';
 
 export type LibraryStackParamList = {
   Library: undefined;
   CreateBook: undefined;
   UpdateBook: {id: string, book: Book};
   CreateSection: {id: string};
+  UpdateSection: {bookId: string, sectionId: string, section: Section}
 }
 
 const Stack = createNativeStackNavigator<LibraryStackParamList>();
@@ -25,6 +28,7 @@ const LibraryTab: React.VFC = () => {
       <Stack.Screen name='CreateBook' component={CreateBookScreen} />
       <Stack.Screen name='UpdateBook' component={UpdateBookScreen} />
       <Stack.Screen name='CreateSection' component={CreateSectionScreen} />
+      <Stack.Screen name='UpdateSection' component={UpdateSectionScreen} />
     </Stack.Navigator>
   );
 };
