@@ -1,6 +1,7 @@
 import {auth, store} from '../config/firebase';
 import {addDoc, collection} from 'firebase/firestore';
 import Section from './class/Section';
+import readCsv from './readcsv';
 
 /**
  * 現在のユーザーの問題集内にセクションを作成する
@@ -13,7 +14,7 @@ const createSection = async (
 ) => {
   if (typeof(auth.currentUser?.uid) == 'string') {
     const uid = auth.currentUser?.uid;
-    console.log(fileUri); // TODO: 消す
+    readCsv(fileUri);
     await addDoc(collection(store, 'users', uid, 'books', bookId, 'sections'), {
       title: section.title,
       type: section.type,
