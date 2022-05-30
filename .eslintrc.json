@@ -22,6 +22,7 @@
     "rules": {
         "quotes": [2, "single"],
         "linebreak-style": ["error", "windows"],
-        "valid-jsdoc": "off"
+        "valid-jsdoc": "off",
+        "max-len": ["error", { "code": 120 }]
     }
 }

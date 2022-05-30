@@ -20,9 +20,7 @@ const readBook = async () => {
   if (typeof(auth.currentUser?.uid) == 'string') {
     const ret: ReadBookReturn = {};
     const uid = auth.currentUser?.uid;
-    const bookQuerySnapShot = await getDocs(
-        collection(store, 'users', uid, 'books').withConverter(bookConverter),
-    );
+    const bookQuerySnapShot = await getDocs(collection(store, 'users', uid, 'books').withConverter(bookConverter));
     bookQuerySnapShot.forEach((doc) => {
       ret[doc.id] = {
         'book': doc.data(),
@@ -32,8 +30,7 @@ const readBook = async () => {
     for (const key in ret) {
       if (key) {
         const sectionQuerySnapShot = await getDocs(
-            collection(store, 'users', uid, 'books', key, 'sections')
-                .withConverter(sectionConverter),
+            collection(store, 'users', uid, 'books', key, 'sections').withConverter(sectionConverter),
         );
         sectionQuerySnapShot.forEach((doc) => {
           ret[key].sections[doc.id] = doc.data();

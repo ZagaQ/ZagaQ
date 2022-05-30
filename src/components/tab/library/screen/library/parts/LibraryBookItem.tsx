@@ -49,7 +49,12 @@ const LibraryBookItem: React.VFC<LibraryBookItemProps> = (
       <FlatList
         data={Object.entries(sections).map(([key, value]) => ({key, value}))}
         renderItem={({item}) =>
-          <LibrarySectionItem bookId={id} id={item.key} data={item.value} />
+          <LibrarySectionItem
+            bookId={id}
+            id={item.key}
+            data={item.value}
+            reload={reload}
+          />
         }
       />
     </>

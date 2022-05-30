@@ -8,6 +8,7 @@ import {LibraryStackParamList} from '../../LibraryTab';
 import readBook, {ReadBookReturn} from '../../../../../script/readBook';
 import LibraryList from './parts/LibraryList';
 
+
 type Props = NativeStackScreenProps<LibraryStackParamList, 'Library'>
 
 /**
@@ -15,7 +16,6 @@ type Props = NativeStackScreenProps<LibraryStackParamList, 'Library'>
  */
 const LibraryScreen: React.VFC<Props> = ({navigation}) => {
   const [books, setBooks] = React.useState<ReadBookReturn>({});
-
   const getBookData = React.useCallback(async () => {
     setBooks(await readBook());
   }, []);
