@@ -33,6 +33,14 @@ const BookActionButton: React.VFC<BookActionButtonProps> = ({item, reload}) => {
     );
   }, [item]);
 
+  const onPressCreateSectionButton = React.useCallback(() => {
+    navigation.navigate(
+        'CreateSection',
+        {id: item.key},
+    );
+    onClose();
+  }, [item]);
+
   return (
     <View>
       <Button variant="ghost" colorScheme="gray" onPress={onOpen}>
@@ -40,7 +48,11 @@ const BookActionButton: React.VFC<BookActionButtonProps> = ({item, reload}) => {
       </Button>
       <Actionsheet isOpen={isOpen} onClose={onClose}>
         <Actionsheet.Content>
-          <Actionsheet.Item>セクションの追加</Actionsheet.Item>
+          <Actionsheet.Item
+            onPress={onPressCreateSectionButton}
+          >
+            セクションの追加
+          </Actionsheet.Item>
           <Actionsheet.Item
             onPress={onPressUpdateBookButton}
           >
