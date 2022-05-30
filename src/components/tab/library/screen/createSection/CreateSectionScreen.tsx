@@ -55,7 +55,11 @@ const CreateSectionScreen: React.VFC<Props> = ({navigation, route}) => {
   const pressCreateSectionButton = React.useCallback(async () => {
     if (validationCreateSectionForm()) {
       try {
-        await createSection(route.params.id, {title, type, description});
+        await createSection(
+            route.params.id,
+            {title, type, description},
+            fileUri,
+        );
       } catch (e) {
         if (e instanceof Error) {
           setCreateError(e.message);
