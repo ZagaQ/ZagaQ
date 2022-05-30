@@ -7,10 +7,11 @@ import Section from '../../../../../../script/class/Section';
 import {
   NativeStackNavigationProp,
 } from '@react-navigation/native-stack/lib/typescript/src/types';
+import DeleteSectionModal from './DeleteSectionModal';
 
 type SectionActionButtonProps = {
   item: {
-    BookId: string,
+    bookId: string,
     id: string,
     value: Section,
   }
@@ -43,6 +44,7 @@ const SectionActionButton: React.VFC<SectionActionButtonProps> = (
           >
             情報の編集
           </Actionsheet.Item>
+          <DeleteSectionModal item={item} reload={reload} />
         </Actionsheet.Content>
       </Actionsheet>
     </View>

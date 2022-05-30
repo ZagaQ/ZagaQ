@@ -28,7 +28,7 @@ const LibrarySectionItem: React.VFC<LibrarySectionItemProps> = (
         <VStack>
           <SectionActionButton
             item={{
-              BookId: bookId,
+              bookId: bookId,
               id: id,
               value: data,
             }}
