@@ -12,7 +12,6 @@ const readCsv = async (uri: string) => {
     });
     ret.push(addItem);
   });
-  console.log(ret);
   return ret;
 };
 
